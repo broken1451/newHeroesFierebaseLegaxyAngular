@@ -1,0 +1,91 @@
+<h1>Heroe <small>nombre heroe</small></h1>
+<hr>
+
+
+
+<div>
+    <div class="text-right">
+        <button type="submit" class="btn btn-danger w-25 mb-5" (click)="back()">
+            <i class="fa fa-arrow-left"></i>
+           Regresar
+        </button>
+    </div>
+    <div class="row w-100">
+        <div class="col">         
+                @if(heroeForm.get('id')?.value != ''){
+                    <button type="submit" class="btn btn-primary w-100 mb-5" (click)="clean('crear')">
+                        <i class="fa fa-trash"></i>
+                       Limpiar formulario
+                    </button>
+                }
+
+               <form autocomplete="off" [formGroup]="heroeForm" (ngSubmit)="submit()">
+                    <div class="form-group">
+                        <label for="nombre">Firebase ID</label>
+                        <input type="text" 
+                               class="form-control" 
+                               placeholder="Firebase ID" 
+                               name="firebaseId"
+                               formControlName="id">
+                        <small class="form-text text-muted">Este campo es autogenerado</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" 
+                               class="form-control" 
+                               placeholder="Nombre del heroe" 
+                               name="nombre" 
+                               required
+                               formControlName="nombre">
+                    </div>
+                    <div class="form-group">
+                        <label for="poder">Poder</label>
+                        <input type="text" 
+                               class="form-control" 
+                               placeholder="Poder del heroe" 
+                               name="poder"
+                               formControlName="poder">
+                    </div>
+                    <div class="form-group">
+                        <label for="estado">Estado</label>
+                        <br>
+                 
+                        @if(heroeForm.get('vivo')?.value == true){
+                            <button type="button" (click)="changeStatus(heroeForm.get('vivo')?.value)" class="btn btn-outline-success w-50">
+                                <i class="fa fa-smile-wink"></i>
+                                Vivo
+                            </button>
+                        } @else {
+                            <button type="button" class="btn btn-outline-danger w-50" (click)="changeStatus(heroeForm.get('vivo')?.value)">
+                                <i class="fa fa-dizzy"></i>
+                                Muerto
+                            </button>
+                        }
+                    </div>
+
+                    <hr>
+           
+                    <hr>
+
+
+                    @if(heroeForm.get('id')?.value != '') {
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary w-25">
+                                <i class="fa fa-save"></i>
+                                Actualizar heroe
+                            </button>
+                        </div>
+
+                    } @else {
+                        <div class="form-group text-center">
+                            <button type="submit" class="btn btn-primary w-25">
+                                <i class="fa fa-save"></i>
+                                Crear Heroe
+                            </button>
+                        </div>
+                    }
+
+
+                </form>
+            </div>
+        </div>

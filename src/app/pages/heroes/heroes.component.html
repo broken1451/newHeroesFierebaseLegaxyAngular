@@ -1,0 +1,53 @@
+<h1>Listado de heroes</h1>
+<hr>
+<div class="row">
+  <div class="col text-right">
+    <button (click)="goto()" type="button" class="btn btn-primary">
+      <i class="fas fa-plus"></i> Agregar
+    </button>
+  </div>
+</div>
+
+@if (loading ){
+  <app-loading></app-loading>
+} @else if(heroes.length === 0){
+  <app-not-found-heroes></app-not-found-heroes>
+} @else  { 
+  <table class="table mt-3">
+    <caption>Description of the heroes</caption>
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Nombre</th>
+        <th scope="col">Poder</th>
+        <th scope="col">Vivo</th>
+        <th scope="col">Tools</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (heroe of heroes; track heroe.id; let idx = $index) {
+      <tr>
+        <th scope="row">{{idx + 1}}</th>
+        <td>{{heroe.nombre}}</td>
+        <td>{{heroe.poder}}</td>
+        <td>
+          @if (heroe.vivo) {
+            <label class="badge badge-success">Vivo</label>
+          } @else{
+            <label class="badge badge-danger">Muerto</label>
+          }
+        </td>
+        <td>
+          <button type="button" (click)="redirect(heroe.id)" class="btn btn-outline-info">
+            <i class="fas fa-edit"></i>
+          </button>
+          <!-- (click)="deleteHeroe(heroe, idx)" -->
+          <button type="button" class="btn btn-outline-danger" (click)="deleteHeroe(heroe)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </td>
+      </tr>
+      }
+    </tbody>
+  </table>
+}
